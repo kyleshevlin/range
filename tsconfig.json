@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "target": "esnext",
+    "types": ["vitest/globals"]
+  }
+}

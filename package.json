@@ -1,0 +1,41 @@
+{
+  "name": "@kyleshevlin/range",
+  "version": "0.0.0",
+  "description": "A basic end-inclusive range implementation in TypeScript",
+  "type": "module",
+  "source": "src/index.ts",
+  "main": "./dist/range.cjs",
+  "module": "./dist/range.module.js",
+  "unpkg": "./dist/range.umd.js",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "exports": {
+    "require": "./dist/range.cjs",
+    "default": "./dist/range.module.js"
+  },
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "microbundle",
+    "dev": "microbundle watch",
+    "format": "prettier --write src/**/*.ts",
+    "prerelease": "rm -rf dist && npm run build",
+    "release": "npx np",
+    "test": "vitest"
+  },
+  "author": "Kyle Shevlin <kyle.a.shevlin@gmail.com> (https://kyleshevlin.com/)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kyleshevlin/range.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "microbundle": "^0.15.1",
+    "prettier": "^3.5.2",
+    "vitest": "^3.0.7"
+  }
+}
