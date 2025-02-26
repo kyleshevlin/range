@@ -1,6 +1,6 @@
 {
   "name": "@kyleshevlin/range",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A basic end-inclusive range implementation in TypeScript",
   "type": "module",
   "source": "src/index.ts",
