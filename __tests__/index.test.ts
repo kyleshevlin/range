@@ -61,7 +61,7 @@ describe('union', () => {
 
   test('with disjoint ranges', () => {
     const range = Range.of(1, 10)
-    expect(() => range.union(Range.of(20, 30))).toThrow('Ranges are disjoint')
+    expect(range.union(Range.of(20, 30))).toEqual(null)
   })
 })
 
@@ -73,9 +73,7 @@ describe('intersection', () => {
 
   test('with disjoint ranges', () => {
     const range = Range.of(1, 10)
-    expect(() => range.intersection(Range.of(20, 30))).toThrow(
-      'Ranges are disjoint'
-    )
+    expect(range.intersection(Range.of(20, 30))).toEqual(null)
   })
 })
 
