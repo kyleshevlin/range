@@ -37,7 +37,16 @@ export class Range {
     return this.start <= other.end && this.end >= other.start
   }
 
+  isAdjacentTo(other: Range) {
+    return this.end + 1 === other.start || this.start - 1 === other.end
+  }
+
   union(other: Range) {
+    // We can reasonably unionize ranges that are adjacent to each other
+    if (!this.overlaps(other) && !this.isAdjacentTo(other)) {
+      throw new Error('Ranges are disjoint')
+    }
+
     return new Range(
       Math.min(this.start, other.start),
       Math.max(this.end, other.end)
@@ -45,6 +54,11 @@ export class Range {
   }
 
   intersection(other: Range) {
+    // We do not have the concept of the "empty Range", like in Sets
+    if (!this.overlaps(other)) {
+      throw new Error('Ranges are disjoint')
+    }
+
     return new Range(
       Math.max(this.start, other.start),
       Math.min(this.end, other.end)

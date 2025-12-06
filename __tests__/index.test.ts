@@ -40,14 +40,43 @@ test('overlaps', () => {
   expect(range.overlaps(Range.of(11, 20))).toEqual(false)
 })
 
-test('union', () => {
-  const range = Range.of(1, 10)
-  expect(range.union(Range.of(11, 20))).toEqual(Range.of(1, 20))
+test('isAdjacentTo', () => {
+  const range = Range.of(11, 20)
+  expect(range.isAdjacentTo(Range.of(0, 9))).toEqual(false)
+  expect(range.isAdjacentTo(Range.of(0, 10))).toEqual(true)
+  expect(range.isAdjacentTo(Range.of(21, 30))).toEqual(true)
+  expect(range.isAdjacentTo(Range.of(22, 30))).toEqual(false)
 })
 
-test('intersection', () => {
-  const range = Range.of(1, 10)
-  expect(range.intersection(Range.of(5, 15))).toEqual(Range.of(5, 10))
+describe('union', () => {
+  test('with overlapping ranges', () => {
+    const range = Range.of(1, 10)
+    expect(range.union(Range.of(5, 15))).toEqual(Range.of(1, 15))
+  })
+
+  test('with adjacent ranges', () => {
+    const range = Range.of(1, 10)
+    expect(range.union(Range.of(11, 20))).toEqual(Range.of(1, 20))
+  })
+
+  test('with disjoint ranges', () => {
+    const range = Range.of(1, 10)
+    expect(() => range.union(Range.of(20, 30))).toThrow('Ranges are disjoint')
+  })
+})
+
+describe('intersection', () => {
+  test('with overlapping ranges', () => {
+    const range = Range.of(1, 10)
+    expect(range.intersection(Range.of(5, 15))).toEqual(Range.of(5, 10))
+  })
+
+  test('with disjoint ranges', () => {
+    const range = Range.of(1, 10)
+    expect(() => range.intersection(Range.of(20, 30))).toThrow(
+      'Ranges are disjoint'
+    )
+  })
 })
 
 test('iterator', () => {
